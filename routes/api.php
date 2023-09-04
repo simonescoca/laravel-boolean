@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Guest\CockailController as ApiCockailController;
+use App\Http\Controllers\Guest\CocktailController as ApiCocktailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +20,5 @@ use App\Http\Controllers\Guest\CockailController as ApiCockailController;
 // });
 
 
-Route::get('/cocktails', [ApiCockailController::class, 'index'])->name('guest.cocktails.index');
-Route::get('/cocktails/{cocktail}', [ ApiCockailController::class, 'show' ])->name('guest.cocktails.show');
+Route::get('/cocktails', [ApiCocktailController::class, 'index'])->name('guest.cocktails.index');
+Route::get('/cocktails/{cocktail}', [ ApiCocktailController::class, 'show' ])->name('guest.cocktails.show');
