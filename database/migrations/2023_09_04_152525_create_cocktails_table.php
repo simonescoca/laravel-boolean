@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('category');
             $table->boolean('with_ice')->default(true);
             $table->string('glass_type');
+            $table->float('crafting_difficulty', 2, 1)->unsigned();
+            $table->tinyInteger('crafting_time')->unsigned();
+            $table->float('price', 3, 2)->unsigned();
             $table->timestamps();
         });
     }
