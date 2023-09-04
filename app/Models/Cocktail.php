@@ -11,5 +11,5 @@ class Cocktail extends Model
 
     protected $table = "cocktails";
 
-    protected $fillable = ['name','image','alcoholic_level','category'];
+    protected $fillable = ['name','image','alcoholic_level','category','with_ice','glass_type','crafting_difficulty','crafting_time','price'];
 }
