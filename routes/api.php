@@ -20,5 +20,5 @@ use App\Http\Controllers\Guest\CocktailController as ApiCocktailController;
 // });
 
 
-Route::get('/cocktails', [ApiCocktailController::class, 'index'])->name('guest.cocktails.index');
-Route::get('/cocktails/{cocktail}', [ ApiCocktailController::class, 'show' ])->name('guest.cocktails.show');
+Route::get('/cocktails', [ApiCocktailController::class, 'index'])->name('api.cocktails.index');
+Route::get('/cocktails/{cocktail}', [ ApiCocktailController::class, 'show' ])->name('api.cocktails.show');
