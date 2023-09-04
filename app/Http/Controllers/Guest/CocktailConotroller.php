@@ -13,7 +13,7 @@ class CocktailConotroller extends Controller
     public function index()
     {
 
-        return 'index';
+        return view ('guest.cocktails.index');
     }
 
     /**
@@ -21,6 +21,6 @@ class CocktailConotroller extends Controller
      */
     public function show(string $id)
     {
-        return 'show';
+        return view ('guest.cocktails.show');
     }
 }
