@@ -23,8 +23,8 @@ class Cocktail extends Model
         'price'
     ];
 
-    public function ingridients()
+    public function ingredients()
     {
-        return $this->belogsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class);
     }
 }

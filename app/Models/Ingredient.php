@@ -13,8 +13,8 @@ class Ingredient extends Model
         'name'
     ];
 
-    public function ingridients()
+    public function cocktails()
     {
-        return $this->belogsToMany(Cocktail::class);
+        return $this->belongsToMany(Cocktail::class);
     }
 }
