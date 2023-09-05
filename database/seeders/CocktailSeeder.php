@@ -3,22 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\Cocktail;
+use App\Models\Ingredient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 
 class CocktailSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(Faker $faker): void
     {
+        $ingredientIds = Ingredient::all()->pluck('id');
         $cocktails =[
             [
                 "name" => "Zombie cocktail",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2020/06/zombie-cocktail-1200x675.jpg",
                 "alcoholic_level" => 3,
-                "category" => "Sweet",
+                "type" => "Sweet",
                 "with_ice" => true,
                 "glass_type" => "Cocktail Glass",
                 "crafting_difficulty" => 2.2,
@@ -28,7 +32,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Bronx Cocktail",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2021/06/Bronx-cocktail-1200x675.jpg",
                 "alcoholic_level" => 4,
-                "category" => "Sour",
+                "type" => "Sour",
                 "with_ice" => false,
                 "glass_type" => "Martini Cocktail Glass",
                 "crafting_difficulty" => 2.4,
@@ -38,7 +42,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Negroni",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2017/04/negroni-cocktail-ricetta-1200x675.jpg",
                 "alcoholic_level" => 5,
-                "category" => "Sour",
+                "type" => "Sour",
                 "with_ice" => true,
                 "glass_type" => "Short Cocktail Glass",
                 "crafting_difficulty" => 2.5,
@@ -48,7 +52,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Pink Lady",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2021/07/Pink-Lady-cocktail-1200x675.jpg",
                 "alcoholic_level" => 3,
-                "category" => "Sweet",
+                "type" => "Sweet",
                 "with_ice" => true,
                 "glass_type" => "Martini Cocktail Glass",
                 "crafting_difficulty" => 2.2,
@@ -58,7 +62,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Martinez",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2021/06/Martinez-cocktail-1200x675.jpg",
                 "alcoholic_level" => 2,
-                "category" => "Sour",
+                "type" => "Sour",
                 "with_ice" => false,
                 "glass_type" => "Round Cocktail Glass",
                 "crafting_difficulty" => 2.4,
@@ -68,7 +72,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Manhattan",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2023/01/Manhattan-cocktail.jpg",
                 "alcoholic_level" => 5,
-                "category" => "Sour",
+                "type" => "Sour",
                 "with_ice" => true,
                 "glass_type" => "Round Cocktail Glass",
                 "crafting_difficulty" => 3.0,
@@ -78,7 +82,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Old Fashioned",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2018/08/old-fashioned.jpg",
                 "alcoholic_level" => 4,
-                "category" => "Sweet",
+                "type" => "Sweet",
                 "with_ice" => true,
                 "glass_type" => "Short Cocktail Glass",
                 "crafting_difficulty" => 3.1,
@@ -88,7 +92,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Daiquiri",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2017/07/daiquiri.jpg",
                 "alcoholic_level" => 3,
-                "category" => "Sweet",
+                "type" => "Sweet",
                 "with_ice" => true,
                 "glass_type" => "Round Cocktail Glass",
                 "crafting_difficulty" => 3.0,
@@ -98,7 +102,7 @@ class CocktailSeeder extends Seeder
                 "name" => "Margarita",
                 "image" => "https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2023/06/Margarita-11-1200x675.jpg",
                 "alcoholic_level" => 3,
-                "category" => "Sweet",
+                "type" => "Sweet",
                 "with_ice" => true,
                 "glass_type" => "Martini Cocktail Glass",
                 "crafting_difficulty" => 2.3,
@@ -112,13 +116,18 @@ class CocktailSeeder extends Seeder
             $newCocktail->name = $cocktail['name'];
             $newCocktail->image = $cocktail['image'];
             $newCocktail->alcoholic_level = $cocktail['alcoholic_level'];
-            $newCocktail->category = $cocktail['category'];
+            $newCocktail->type = $cocktail['type'];
             $newCocktail->with_ice = $cocktail['with_ice'];
             $newCocktail->glass_type = $cocktail['glass_type'];
             $newCocktail->crafting_difficulty = $cocktail['crafting_difficulty'];
             $newCocktail->crafting_time = $cocktail['crafting_time'];
             $newCocktail->price = $cocktail['price'];
+            $newCocktail->slug = Str::of($newCocktail->name)->slug('-');
             $newCocktail->save();
+            $newCocktail->slug = Str::of("$newCocktail->id " . $newCocktail->name)->slug('-');
+            $newCocktail->save();
+
+            $newCocktail->ingredients()->sync([$faker->randomElement($ingredientIds),$faker->randomElement($ingredientIds),$faker->randomElement($ingredientIds),$faker->randomElement($ingredientIds)]);
         };
     }
 }
