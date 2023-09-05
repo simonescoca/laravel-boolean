@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('cocktails', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->text('image')->nullable();
             $table->tinyInteger('alcoholic_level')->unsigned();
-            $table->string('category');
+            $table->string('type');
             $table->boolean('with_ice')->default(true);
             $table->string('glass_type');
             $table->float('crafting_difficulty', 2, 1)->unsigned();
